@@ -1,0 +1,37 @@
+---
+const TITLE = "Ownrdisk's Archives";
+
+const MENU_ITEMS = [
+    { name: "Home", href: "/" },
+    { name: "Notes", href: "/notes" },
+    { name: "Archive", href: "/archive" },
+    { name: "About", href: "/about" },
+];
+
+const currentPath = new URL(Astro.request.url).pathname;
+---
+
+<header class="flex flex-col items-center justify-center border-bottom">
+    <div class="flex h-[71px] items-center justify-center border-bottom w-full">
+        <div>
+            <h1 class="text-2xl font-bold">{TITLE}</h1>
+        </div>
+    </div>
+    <nav class="h-[48px]">
+        <ul class="flex justify-center items-center h-full">
+            {MENU_ITEMS.map((item) => {
+                const isActive = item.href === currentPath;
+                return (
+                    <li class={`menu-item ${isActive ? 'selected' : ''}`} >
+                        <a
+                            href={item.href}
+                            aria-current={isActive ? "page" : undefined}
+                        >
+                            {item.name}
+                        </a>
+                    </li>
+                );
+            })}
+        </ul>
+    </nav>
+</header>
