@@ -38,3 +38,12 @@ header h1 {
     box-shadow: inset 0 -3px 0 var(--color-fg-primary);
     font-weight: bold;
 }
+
+button:hover {
+    background-color: #d1dce5;
+}
+
+button {
+    border-radius: 8px;
+    transition: background-color 0.2s ease-in-out;
+}

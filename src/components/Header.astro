@@ -1,9 +1,13 @@
 ---
-const TITLE = "Ownrdisk's Archives";
+
+import ShareButton from "./ShareButton.astro";
+import SearchButton from "./SearchButton.astro";
+
+const TITLE = "Owner Website";
 
 const MENU_ITEMS = [
     { name: "Home", href: "/" },
-    { name: "Notes", href: "/notes" },
+    { name: "Projects", href: "/projects" },
     { name: "Archive", href: "/archive" },
     { name: "About", href: "/about" },
 ];
@@ -12,12 +16,19 @@ const currentPath = new URL(Astro.request.url).pathname;
 ---
 
 <header class="flex flex-col items-center justify-center border-bottom">
-    <div class="flex h-[71px] items-center justify-center border-bottom w-full">
+    <div class="flex h-[71px] items-center justify-between border-bottom w-full p-[20px]">
+        <div>
+            
+        </div>
         <div>
             <h1 class="text-2xl font-bold">{TITLE}</h1>
         </div>
+        <div class="flex gap-2">
+            <ShareButton />
+            <SearchButton />
+        </div>
     </div>
-    <nav class="h-[48px]">
+    <nav class="h-[48px] w-full">
         <ul class="flex justify-center items-center h-full">
             {MENU_ITEMS.map((item) => {
                 const isActive = item.href === currentPath;
