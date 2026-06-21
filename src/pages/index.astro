@@ -1,8 +1,39 @@
 ---
-import Layout from "../components/Layout.astro";
-import Header from "../components/Header.astro";
+import { getCollection } from "astro:content";
+
+import Layout from "@components/Layout.astro";
+import PortableArchiveList from "@components/PortableArchiveList.astro";
+import MostPopularPreview from "@components/MostPopularPreview.astro";
+import Hero from "@components/Hero.astro";
+
+const CollectionPost = await getCollection("posts");
+const CollectionMostPopular = CollectionPost.slice(0, 4);
 ---
 
-<Layout title="Ownrdisk Website">
-	<Header />
-</Layout>	
+<Layout>
+    <div class="container mx-auto max-w-7xl px-4 pt-4">
+        <div class="flex flex-col gap-6">
+            <Hero />
+            <div class="flex flex-col gap-3 px-2">
+                <div>
+                    <h1
+                        class="text-primary font-semibold font-title text-title-popular leading-6"
+                    >
+                        Most popular
+                    </h1>
+                </div>
+                <div class="grid grid-cols-4 gap-x-2">
+                    {
+                        CollectionMostPopular.map((post) => (
+                            <MostPopularPreview post={post} />
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="px-2 py-6">
+            <hr class="border-gray" />
+        </div>
+        <PortableArchiveList CollectionPost={CollectionPost} />
+    </div>
+</Layout>

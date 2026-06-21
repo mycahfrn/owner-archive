@@ -1,0 +1,34 @@
+---
+import PostPreview from "@components/PostPreview.astro"
+import SearchButton from "@components/SearchButton.astro"
+
+const { CollectionPost } = Astro.props
+
+const classInactive = "text-button-tabs h-8 px-2 rounded font-semibold text-tabs hover:text-primary duration-200 ease-in-out"
+const classActive = "text-primary bg-hover-button h-8 px-2 text-tabs font-semibold rounded" 
+---
+
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6 pb-4">
+    <div class="col-span-1 lg:col-span-3">
+        <div class="flex justify-between pb-4 px-2">
+            <div tabindex="0" aria-label="Tabs" role="tablist" aria-orientation="horizontal" data-orientation="horizontal" class="flex p-1 rounded border border-gray gap-1" >
+                <button class={classActive}>Lastest</button>
+                <button class={classInactive}>Top</button>
+                <button class={classInactive}>Discussion</button>
+            </div>
+            <SearchButton />
+        </div>
+        <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-1 gap-x-4"
+        >
+            {CollectionPost.map((post: unknown) => <PostPreview post={post} /> )}
+        </div>
+        <div class="pt-4 px-2">
+            <button class="p-4 h-10 text-popular-preview-title items-center rounded-lg text-primary font-semibold bg-hover-button flex gap-2">
+                See All
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg>
+            </button>
+        </div>
+    </div>
+    <div class="col-span-1 lg:col-span-1">Right side</div>
+</div>

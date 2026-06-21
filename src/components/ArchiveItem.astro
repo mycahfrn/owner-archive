@@ -1,0 +1,17 @@
+---
+import { getDate } from "../utils/date"
+import ShareButton from "./ShareButton.astro";
+
+const { date = '2024-06-01', title = 'Interpreting Watching T.V', excerpt = "What is left of you if all your negative memories are erased? Are you still you?" } = Astro.props;
+const formattedDate = getDate(date)
+---
+
+<article class="flex flex-col gap-1">
+    <div class="text-primary text-title-post font-semibold">{title}</div>
+    <span class="block text-primary text-popular-preview-title">{excerpt}</span>
+    <time datetime={date} class="text-[#808587] text-preview-date font-medium">{formattedDate}</time>
+    <div class="h-[24px]  flex justify-end">
+        
+    </div>
+    <img>
+</article>

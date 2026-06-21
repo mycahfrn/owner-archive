@@ -1,0 +1,25 @@
+---
+import { formattedDate } from "@utils/date";
+
+const { post: { data } } = Astro.props;
+const { title, excerpt, date, srcPreview, altPreview } = data;
+
+---
+
+<article class="flex flex-col gap-3 p-2">
+    <picture class="rounded-post-preview">
+        <img
+            src={srcPreview}
+            alt={altPreview}
+            class="rounded-post-preview aspect-preview object-cover"
+        />
+    </picture>
+    <div class="flex flex-col gap-1">
+        <h1 class="text-primary text-title-post font-semibold font-title">
+            {title}
+        </h1>
+        <p class="text-primary text-sm">{excerpt}</p>
+        <date class="text-preview-date text-subtitle font-medium text-date">{formattedDate(date)}</date>
+        <div class="post-ufi h-post-ufi"></div>
+    </div>
+</article>

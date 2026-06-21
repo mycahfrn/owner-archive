@@ -1,8 +1,67 @@
 ---
 import Layout from "../components/Layout.astro";
-import Header from "../components/Header.astro";
----
+import ArchiveItem from "../components/ArchiveItem.astro";
+import SearchButton from "../components/SearchButton.astro";
 
+// 1. Definimos una interfaz para el tipo de dato
+interface JournalItem {
+    date: string;
+    title: string;
+    excerpt: string;
+    srcPreview: string;
+    altPreview: string;
+}
+
+import { getCollection } from "astro:content";
+const CollectionPost = await getCollection("posts");
+const CollectionItemsPosts = CollectionPost.map(p => p.data)
+
+
+// 3. Corregido el error de sintaxis en (a, b) y añadido el método getTime()
+// Nota: En TS es mejor usar .getTime() al restar fechas para evitar quejas de tipos
+CollectionItemsPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+// 4. Tipamos el parámetro de la función como string
+const getMonthKey = (dateString: string): string => {
+    return new Date(dateString)
+        .toLocaleString('en-US', { month: 'long', year: 'numeric' })
+        .toUpperCase();
+};
+const classInactive = "text-button-tabs h-8 px-2 rounded font-semibold text-tabs hover:text-primary duration-200 ease-in-out"
+const classActive = "text-primary bg-hover-button h-8 px-2 text-tabs font-semibold rounded"
+
+---
 <Layout title="Ownrdisk Website">
-	<Header />
-</Layout>	
+    <div class="max-w-156 mx-auto pt-3 pb-8 px-4 mt-2.5">
+        <div class="flex justify-between pb-4">
+            <div tabindex="0" aria-label="Tabs" role="tablist" aria-orientation="horizontal" data-orientation="horizontal" class="flex p-1 rounded border border-gray gap-1" >
+                <button class={classActive}>Lastest</button>
+                <button class={classInactive}>Top</button>
+                <button class={classInactive}>Discussion</button>
+            </div>
+            <SearchButton />
+        </div>
+
+        <div class="flex flex-col gap-4">
+            {CollectionItemsPosts.map((post, i) => {
+                const currentMonth = getMonthKey(post.date);
+                // Si es el primer elemento, o el mes cambió respecto al anterior, mostramos el título del mes
+                const showMonthHeading = i === 0 || currentMonth !== getMonthKey(CollectionItemsPosts[i - 1].date);
+
+                return (
+                    <div class="w-full flex flex-col gap-4">
+                        {showMonthHeading && i !== 0 && (
+                            <h2 class="text-[#ea580c] text-preview-date font-medium mt-2">{currentMonth}</h2>
+                        )}
+
+                        <ArchiveItem date={post.date} title={post.title} excerpt={post.excerpt} />
+
+                        {i < (CollectionItemsPosts.length - 1) && (
+                            <div class="border-b border-[#e5e7eb] w-full" />
+                        )}
+                    </div>
+                );
+            })}
+        </div>
+    </div>
+</Layout>

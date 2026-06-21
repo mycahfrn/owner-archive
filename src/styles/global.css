@@ -1,49 +1,46 @@
 @import "tailwindcss";
 
 :root {
-    --color-fg-primary: hsl(204.00000000000003, 25.688073394495415%, 28.941176470588236%);
+    --animate-hover: color var(--animation-timing-fast) var(--animation-smooth), background-color var(--animation-timing-fast) var(--animation-smooth), box-shadow var(--animation-timing-fast) var(--animation-smooth), border var(--animation-timing-fast) var(--animation-smooth), border-radius var(--animation-timing-fast) var(--animation-smooth), opacity var(--animation-timing-fast) var(--animation-smooth), filter var(--animation-timing-fast) var(--animation-smooth), stroke var(--animation-timing-fast) var(--animation-smooth), transform var(--animation-timing-fast) var(--animation-smooth), scale var(--animation-timing-fast) var(--animation-smooth), outline var(--animation-timing-fast) var(--animation-smooth);
 }
 
-.border-bottom {
-    border-top: 1px solid #d8e0e6;
-    border-bottom: 1px solid #d8e0e6;
+@font-face {
+    font-family: Lora;
+    display: swap;
+    src: url("/fonts/Lora-VariableFont_wght.ttf");
 }
 
-header h1 {
-    color: var(--color-fg-primary);
+@theme {
+  --color-primary: #374e5d;
+  --color-subtitle: #808587;
+  --text-title-post: 19px;
+  --spacing-title-post: 26px;
+  --radius-post-preview: 4px;
+  --height-post-ufi: 24px;
+  --aspect-preview: 1.5 / 1;
+  --aspect-hero :1.91 / 1;
+  --font-title: "Lora", sans-serif;
+  --text-preview-date: 11px;
+  --spacing-date: 20px;
+  --height-header-title: 71px;
+  --width-button: 40px;
+  --height-button: 40px;
+  --height-header-navbar: 48px;
+  --color-body: #F0F9FF;
+  --color-gray: #d8e0e6;
+  --text-tabs: 13px;
+  --color-button-tabs: #808587;
+  --color-hover-button: #e2eaf0;
+  --color-hover-icons: #d1dce5;
+  --text-title-popular: 17px;
+  --text-popular-preview-title: 15px;
+  --color-footer: #e2eaf0;
+  --color-footer-border: rgb(216, 224, 230);
 }
 
-.menu-item {
-    font-size: 14px;
-    color: var(--color-fg-primary);
-    letter-spacing: .15px;
-    line-height: 20px;
-    font-weight: 500;
-    height: 100%;
-    display: inline-block;
-    padding: 0 12px;
-}
-
-.menu-item a {
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.menu-item:hover {
-    background-color: #e2eaf0;
-}
-
-.menu-item.selected a {
-    box-shadow: inset 0 -3px 0 var(--color-fg-primary);
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: #d1dce5;
-}
-
-button {
-    border-radius: 8px;
-    transition: background-color 0.2s ease-in-out;
+.blurOverlay {
+    -webkit-backdrop-filter: blur(40px);
+    backdrop-filter: blur(40px);
+    -webkit-mask: linear-gradient(90deg, #000, #000 calc(100% - 700px), #0000 calc(100% - 500px), #0000);
+    mask: linear-gradient(90deg, #000, #000 calc(100% - 700px), #0000 calc(100% - 500px), #0000);
 }

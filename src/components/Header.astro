@@ -15,31 +15,24 @@ const MENU_ITEMS = [
 const currentPath = new URL(Astro.request.url).pathname;
 ---
 
-<header class="flex flex-col items-center justify-center border-bottom">
-    <div class="flex h-[71px] items-center justify-between border-bottom w-full p-[20px]">
+<header class="flex flex-col items-center justify-center">
+    <div class="flex h-header-title items-center justify-between w-full p-5">
+        <div></div>
         <div>
-            
-        </div>
-        <div>
-            <h1 class="text-2xl font-bold">{TITLE}</h1>
+            <h1 class="text-2xl font-semibold font-title text-primary">{TITLE}</h1>
         </div>
         <div class="flex gap-2">
             <ShareButton />
             <SearchButton />
         </div>
     </div>
-    <nav class="h-[48px] w-full">
+    <nav class="h-12 w-full border-y-gray" style="border-width: 1px;">
         <ul class="flex justify-center items-center h-full">
             {MENU_ITEMS.map((item) => {
                 const isActive = item.href === currentPath;
                 return (
-                    <li class={`menu-item ${isActive ? 'selected' : ''}`} >
-                        <a
-                            href={item.href}
-                            aria-current={isActive ? "page" : undefined}
-                        >
-                            {item.name}
-                        </a>
+                    <li class={`text primary text-sm leading-5 h-full hover:bg-hover-button transition duration-300 ease-in-out font-medium inline-block px-3`} >
+                        <a class={`flex h-full text-primary items-center  ${isActive ? "shadow-[inset_0_-3px_0_#374e5d] font-bold" : ""}`} href={item.href} aria-current={isActive ? "page" : undefined}>{item.name}</a>
                     </li>
                 );
             })}

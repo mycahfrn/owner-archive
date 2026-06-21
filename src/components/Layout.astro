@@ -1,6 +1,8 @@
 ---
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
 
-const { title } = Astro.props;
+const title = Astro.props.title || "Owner Website";
 
 import "../styles/global.css";
 
@@ -15,7 +17,11 @@ import "../styles/global.css";
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
-    <body class="bg-[#F0F9FF]">
-        <slot />
+    <body class="bg-body min-h-screen flex flex-col">
+        <Header />
+        <main class="flex-1">
+            <slot />
+        </main>
+        <Footer />
     </body>
 </html>
