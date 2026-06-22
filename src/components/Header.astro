@@ -5,11 +5,15 @@ import SearchButton from "./SearchButton.astro";
 
 const TITLE = "Owner Website";
 
+// 1. Obtenemos la ruta base de Astro (ej: "/mi-repositorio")
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
+
+// 2. Construimos dinámicamente las rutas usando la base
 const MENU_ITEMS = [
-    { name: "Home", href: "/" },
-    { name: "Projects", href: "/projects" },
-    { name: "Archive", href: "/archive" },
-    { name: "About", href: "/about" },
+    { name: "Home", href: `${baseUrl}/` },
+    { name: "Projects", href: `${baseUrl}/projects` },
+    { name: "Archive", href: `${baseUrl}/archive` },
+    { name: "About", href: `${baseUrl}/about` },
 ];
 
 const currentPath = new URL(Astro.request.url).pathname;
