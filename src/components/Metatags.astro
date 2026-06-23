@@ -1,0 +1,59 @@
+---
+interface MetatagsProps {
+  title: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const {
+  title,
+  description = '',
+  canonical,
+  image,
+  imageAlt = ''
+} = Astro.props as MetatagsProps;
+
+const siteBase = typeof Astro.site === 'string' ? Astro.site : (Astro.site ? Astro.site.toString() : '');
+const site = siteBase;
+
+let canonicalUrl: string = siteBase;
+if (canonical) {
+  try {
+    canonicalUrl = new URL(canonical, siteBase).toString();
+  } catch (e) {
+    canonicalUrl = siteBase;
+  }
+}
+
+let imageUrl: string | null = null;
+if (image) {
+  try {
+    imageUrl = new URL(image, siteBase).toString();
+  } catch (e) {
+    imageUrl = null;
+  }
+}
+---
+
+<!-- Componente para metadatos Open Graph + Twitter con validaciones TypeScript -->
+
+<link rel="canonical" href={canonicalUrl} />
+<meta name="description" content={description} />
+
+{/* Open Graph */}
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content={site} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+{imageUrl && <meta property="og:image" content={imageUrl} />}
+{imageUrl && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+
+{/* Twitter Cards */}
+<meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{imageUrl && <meta name="twitter:image" content={imageUrl} />}
+

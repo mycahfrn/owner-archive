@@ -1,5 +1,6 @@
 ---
 import Layout from "@components/Layout.astro";
+import Metatags from "@components/Metatags.astro";
 import { getEntry, getCollection, render } from 'astro:content';
 import { formattedDate } from "@utils/date";
 
@@ -14,7 +15,36 @@ if (!post) {
   throw new Error('Post not found');
 }
 const { Content } = await render(post);
+// Tipado explícito del frontmatter de la colección `posts`
+interface PostFrontmatter {
+  title: string;
+  excerpt?: string;
+  date?: string;
+  description?: string;
+  canonical?: string;
+  image?: string; // campo preferido para imagen destacada
+  imageAlt?: string;
+  srcPreview?: string; // nombre usado en los placeholders existentes
+  altPreview?: string;
+}
+
+const meta = post.data as PostFrontmatter;
+const canonical = meta.canonical ?? `/posts/${slug}/`;
+const title = meta.title;
+const description = meta.description ?? meta.excerpt ?? '';
+const image = (meta.image ?? meta.srcPreview) as string | undefined;
+const imageAlt = (meta.imageAlt ?? meta.altPreview ?? title) as string;
 ---
+
+<head>
+  <Metatags
+    title={title}
+    description={description}
+    canonical={canonical}
+    image={image}
+    imageAlt={imageAlt}
+  />
+</head>
 
 <Layout title={post.data.title}>
     <div class="max-w-182 mx-auto px-4 py-8">
