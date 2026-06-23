@@ -10,6 +10,12 @@
     src: url("/owner-archive/fonts/Lora-VariableFont_wght.ttf");
 }
 
+@font-face {
+    font-family: Spectral;
+    display: swap;
+    src: url("/owner-archive/fonts/Spectral-Regular.ttf");
+}
+
 @theme {
   --color-primary: #374e5d;
   --color-subtitle: #808587;
@@ -20,6 +26,7 @@
   --aspect-preview: 1.5 / 1;
   --aspect-hero :1.91 / 1;
   --font-title: "Lora", sans-serif;
+  --font-post: "Spectral", sans-serif;
   --text-preview-date: 11px;
   --spacing-date: 20px;
   --height-header-title: 71px;
