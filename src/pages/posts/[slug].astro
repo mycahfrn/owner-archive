@@ -21,7 +21,7 @@ const { Content } = await render(post);
         <article class="prose prose-lg">
             <h1 class="text-[32px] text-primary font-title font-semibold ">{post.data.title}</h1>
             <p class="font-title text-button-tabs text-lg">{post.data.excerpt}</p>
-            <time datetime={post.data.date} class="text-preview-date">{formattedDate(post.data.date)}</time>
+            <time datetime={post.data.date} class="text-preview-date text-subtitle">{formattedDate(post.data.date)}</time>
             <div class="mt-6 text-primary text-title-post font-post">
                 <Content />
             </div>
