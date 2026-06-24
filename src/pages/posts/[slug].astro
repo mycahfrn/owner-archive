@@ -29,7 +29,7 @@ interface PostFrontmatter {
 }
 
 const meta = post.data as PostFrontmatter;
-const canonical = meta.canonical ?? `/posts/${slug}/`;
+const canonical = meta.canonical ?? `/owner-archive/posts/${slug}/`;
 const title = meta.title;
 const description = meta.description ?? meta.excerpt ?? '';
 const image = (meta.image ?? meta.srcPreview) as string | undefined;
