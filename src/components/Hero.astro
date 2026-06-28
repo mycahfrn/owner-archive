@@ -2,7 +2,9 @@
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
-<div class="px-2 pt-3">
+
+<div class="hidden md:block">
+  <div class="px-2 pt-3">
   <div class="flex relative min-h-100 flex-auto">
     <div class="flex absolute w-full h-full rounded-sm">
       <div class="flex flex-[1px] relative">
@@ -78,6 +80,80 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       </div>
        <div class="flex pointer-events-none flex-[1px]"></div>
     </div>
-   
   </div>
+</div>
+</div>
+
+<div class="block md:hidden">
+  <div class="px-2 pt-3">
+  <div class="flex relative min-h-100 flex-auto">
+    <div class="flex absolute w-full h-full rounded-sm videoLayer flex-col">
+      <div class="w-full flex-[1px] relative flex">
+        <div class="flex relative aspect-hero overflow-hidden flex-[50%] rounded-t-sm">
+          <div class="max-h-[inherit]">
+            <div class="aspecto-hero w-full h-full">
+              <img
+                src="/owner-archive/placeholder/background-hero.webp"
+                class="h-full w-full aspect-hero max-h-[inherit] rounded-sm object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex relative flex-[1px] rounded-b-sm overflow-hidden">
+        <div class="flex aspect-hero absolute top-0 bottom-0 right-0 scale-x-[-1] w-full">
+          <div class="max-h-[inherit]">
+            <img
+                src="/owner-archive/placeholder/background-hero.webp"
+                class="h-full w-full aspect-hero max-h-[inherit] rounded-sm object-cover"
+              />
+          </div>
+        </div>
+      </div>
+      
+      <div
+        class="absolute inset-0 rounded-sm darkOverlay"
+      >
+      </div>
+      <div class="absolute blurOverlay inset-0 rounded-sm"></div>
+    </div>
+    <div class="h-auto bottom-0 left-0 absolute flex pointer-events-none">
+      <div class="dark-theme" style="display: contents;">
+        <div class="flex flex-[1px]">
+          <div class="flex flex-col gap-4 pb-6 pt-4 px-4">
+            <div class="flex flex-col gap-2">
+                <h2 class="text-[#EEEEEE] text-xl font-semibold font-title" style="-webkit-box-orient: vertical;display: -webkit-box;overflow: hidden;-webkit-line-clamp: 3;">Interpreting Watching T.V. by Magdalena Bay</h2>
+                <div class="text-[#EEEEEE] text-[13px]">
+                  "Everywhere you go, you take yourself, that's not a lie."
+                </div>
+                <div class="flex flex-[1px]"></div>
+              </div>
+
+              <div class="flex gap-4 pointer-events-auto items-center">
+                <button class="rounded-[9999px] w-10 h-10 bg-white flex justify-center items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-right"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </button>
+                <div class="uppercase text-[#EEEEEE] text-preview-date leading-5 tracking-[.2px] font-medium">READ THE LASTEST</div>
+              </div>
+            </div>
+            <div class="pointer-events-auto gap-4 flex items-center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>

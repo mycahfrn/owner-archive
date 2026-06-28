@@ -51,3 +51,31 @@
     -webkit-mask: linear-gradient(90deg, #000, #000 calc(100% - 700px), #0000 calc(100% - 500px), #0000);
     mask: linear-gradient(90deg, #000, #000 calc(100% - 700px), #0000 calc(100% - 500px), #0000);
 }
+
+
+.darkOverlay {
+    border-radius: 4px;
+    pointer-events: none;
+    background: linear-gradient(90deg, #0009, #0000);
+}
+
+@media (max-width: 768px) {
+    .darkOverlay {
+        background: linear-gradient(#0000, #0009);
+    }
+}
+
+.blurOverlay {
+    border-radius: 4px;
+    -webkit-backdrop-filter: blur(40px);
+    backdrop-filter: blur(40px);
+    -webkit-mask: linear-gradient(90deg, #000, #000 calc(100% - 700px), #0000 calc(100% - 500px), #0000);
+    mask: linear-gradient(90deg, #000, #000 calc(100% - 700px), #0000 calc(100% - 500px), #0000);
+}
+
+@media (max-width: 768px) {
+    .blurOverlay {
+        -webkit-mask: linear-gradient(0deg, #000, #000 180px, #0000);
+        mask: linear-gradient(0deg, #000, #000 180px, #0000);
+    }
+}
