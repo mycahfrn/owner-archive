@@ -3,7 +3,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <div class="px-2 pt-3">
-  <div class="flex relative min-h-100">
+  <div class="flex relative min-h-100 flex-auto">
     <div class="flex absolute w-full h-full rounded-sm">
       <div class="flex flex-[1px] relative">
         <div
@@ -22,7 +22,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           </div>
         </div>
       </div>
-      <div class="flex-none" style="width: 711px;">
+      <div class="flex-none w-full md:w-177.5" >
         <picture class="max-height-[inherit]">
           <img
             src="/owner-archive/placeholder/background-hero.webp"
@@ -45,14 +45,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             <div class="flex flex-col gap-6">
               <div class="flex flex-col gap-2">
                 <h2 class="text-[#EEEEEE] text-3xl font-semibold font-title" style="-webkit-box-orient: vertical;display: -webkit-box;overflow: hidden;-webkit-line-clamp: 3;">Interpreting Watching T.V. by Magdalena Bay</h2>
-                <div class="text-[#EEEEEE] ">
+                <div class="text-[#EEEEEE] text-sm">
                   "Everywhere you go, you take yourself, that's not a lie."
                 </div>
                 <div class="flex flex-[1px]"></div>
               </div>
 
               <div class="flex gap-4 pointer-events-auto items-center">
-                <button>
+                <button class="rounded-[9999px] w-10 h-10 bg-white flex justify-center items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -69,7 +69,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
                 </button>
-                <div>READ THE LASTEST</div>
+                <div class="uppercase text-[#EEEEEE] text-preview-date leading-5 tracking-[.2px] font-medium">READ THE LASTEST</div>
               </div>
             </div>
             <div class="pointer-events-auto gap-4 flex items-center"></div>

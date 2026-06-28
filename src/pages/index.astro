@@ -14,15 +14,24 @@ const CollectionMostPopular = CollectionPost.slice(0, 4);
     <div class="container mx-auto max-w-7xl px-4 pt-4">
         <div class="flex flex-col gap-6">
             <Hero />
-            <div class="flex flex-col gap-3 px-2">
-                <div>
+            <div class="hidden md:flex flex-col gap-3 px-2">
+                <div class="flex justify-between">
                     <h1
                         class="text-primary font-semibold font-title text-title-popular leading-6"
                     >
                         Most popular
                     </h1>
+                    <div>
+                        <div
+                            class="text-preview-date text-primary leading-5 font-medium uppercase hover:underline hover:cursor-pointer"
+                        >
+                            View All
+                        </div>
+                    </div>
                 </div>
-                <div class="grid grid-cols-4 gap-x-2">
+                <div
+                    class="md:grid lg:grid-cols-4 md:grid-cols-3 gap-x-2 [&>*:nth-child(4)]:hidden lg:[&>*:nth-child(4)]:block"
+                >
                     {
                         CollectionMostPopular.map((post) => (
                             <MostPopularPreview post={post} />
