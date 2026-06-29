@@ -21,14 +21,14 @@ const classActive = "text-primary bg-hover-button h-8 px-2 text-tabs font-semibo
         <div
             class="grid grid-cols-1 md:grid-cols-3 gap-y-1 gap-x-4"
         >
-            {CollectionPost.map((post: unknown) => <PostPreview post={post} /> )}
+            {CollectionPost.map((post: unknown, index:number) => <PostPreview post={post} index={index}/> )}
         </div>
-        <div class="pt-4 px-2">
+        <div class="pt-4 md:px-2">
             <button class="p-4 h-10 text-popular-preview-title items-center rounded-lg text-primary font-semibold bg-hover-button flex gap-2">
                 See All
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"></path></svg>
             </button>
         </div>
     </div>
-    <div class="col-span-1 lg:col-span-1">Right side</div>
+    <div class="col-span-1 lg:col-span-1 hidden md:block">Right side</div>
 </div>

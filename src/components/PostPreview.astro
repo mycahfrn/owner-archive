@@ -2,7 +2,7 @@
 import { formattedDate } from "@utils/date";
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "") || '/owner-archive';
-const { post: { data, id } } = Astro.props;
+const { post: { data, id }, index } = Astro.props;
 const { title, excerpt, date, srcPreview, altPreview } = data;
 
 ---
@@ -25,5 +25,5 @@ const { title, excerpt, date, srcPreview, altPreview } = data;
         <div class="post-ufi h-post-ufi"></div>
     </div>
     </article>
-    <div class="md:py-0 border-t border-gray"></div>
+    {index < 5 && <div class="block md:hidden md:py-0 border-t border-gray"></div>}
 </a>
