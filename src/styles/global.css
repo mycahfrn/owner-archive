@@ -79,3 +79,13 @@
         mask: linear-gradient(0deg, #000, #000 180px, #0000);
     }
 }
+
+html {
+    scrollbar-width: thin;
+    
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: blue; /* El color que tú quieras */
+    border-radius: 10px;       /* Bordes redondeados */
+  }

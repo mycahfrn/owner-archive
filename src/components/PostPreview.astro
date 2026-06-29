@@ -8,7 +8,7 @@ const { title, excerpt, date, srcPreview, altPreview } = data;
 ---
 
 <a href={`${baseUrl}/posts/${id}`} class="block">
-    <article class="flex flex-col gap-3 p-2">
+    <article class="flex flex-col gap-3 pt-2 md:p-2">
     <picture class="rounded-post-preview">
         <img
             src={srcPreview}
@@ -25,4 +25,5 @@ const { title, excerpt, date, srcPreview, altPreview } = data;
         <div class="post-ufi h-post-ufi"></div>
     </div>
     </article>
+    <div class="md:py-0 border-t border-gray"></div>
 </a>

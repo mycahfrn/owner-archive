@@ -20,18 +20,18 @@ const currentPath = new URL(Astro.request.url).pathname;
 ---
 
 <header class="flex flex-col items-center justify-center">
-    <div class="flex h-header-title items-center justify-between w-full p-5">
+    <div class="flex px-3 pt-3 min-h-11 md:h-header-title items-center md:justify-between w-full md:p-5">
         <div></div>
         <div>
-            <h1 class="text-2xl font-semibold font-title text-primary">{TITLE}</h1>
+            <h1 class="text-sm md:text-2xl font-semibold font-title text-primary">{TITLE}</h1>
         </div>
-        <div class="flex gap-2">
+        <div class="hidden md:flex gap-2">
             <ShareButton />
             <SearchButton />
         </div>
     </div>
-    <nav class="h-12 w-full border-y-gray" style="border-width: 1px;">
-        <ul class="flex justify-center items-center h-full">
+    <nav class="h-11.25 md:h-12 w-full md:border-t-gray border-b-gray border-b" >
+        <ul class="flex md:justify-center items-center h-full px-1 md:px-0">
             {MENU_ITEMS.map((item) => {
                 const isActive = item.href === currentPath;
                 return (
