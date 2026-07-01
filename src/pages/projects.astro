@@ -1,11 +1,17 @@
 ---
 import Layout from "../components/Layout.astro";
 import { Image } from "astro:assets";
-import SrcImage from "../content/projects.jpg"
+import SrcImage from "../content/projects.jpg";
+
+import ProjectCard from "@components/ProjectCard.astro";
 ---
 
 <Layout>
-    <div class="mx-auto max-w-64 pt-4">
-        <Image src={SrcImage} alt="image side" />
+    <div class="mx-auto max-w-5xl pt-4">
+        <div class="flex gap-4">
+              <ProjectCard />
+       <ProjectCard />
+       <ProjectCard />
+        </div>
     </div>
-</Layout>	
+</Layout>

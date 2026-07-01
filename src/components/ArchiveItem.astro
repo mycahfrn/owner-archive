@@ -3,16 +3,26 @@ import { getDate } from "../utils/date"
 import ShareButton from "./ShareButton.astro";
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "") || '/owner-archive';
-const { date = '2024-06-01', title = 'Interpreting Watching T.V', excerpt = "What is left of you if all your negative memories are erased? Are you still you?", slug = '' } = Astro.props;
+const { date = '2024-06-01', srcPreview, title = 'Interpreting Watching T.V', excerpt = "What is left of you if all your negative memories are erased? Are you still you?", slug = '' } = Astro.props;
 const formattedDate = getDate(date)
 ---
 
-<article class="flex flex-col gap-1">
+<article class="flex flex-col gap-1 p-2">
     {slug ? (
         <a href={`${baseUrl}/posts/${slug}`} class="no-underline">
-            <div class="text-primary text-title-post font-semibold">{title}</div>
-            <span class="block text-primary text-popular-preview-title">{excerpt}</span>
-            <time datetime={date} class="text-[#808587] text-preview-date font-medium">{formattedDate}</time>
+            <div class="flex">
+                <div class="flex-1 flex flex-col gap-1">
+                    <div class="text-primary text-title-post font-semibold font-title leading-title-post">{title}</div>
+                    <span class="block text-primary text-popular-preview-title leading-5">{excerpt}</span>
+                    <time datetime={date} class="text-[#808587] text-preview-date font-medium leading-5">{formattedDate}</time>
+                </div>
+                <div class="w-40 rounded-sm aspect-preview relative overflow-hidden">
+                    <picture class="max-height-[inherit]">
+                        <img src={srcPreview} alt="" 
+                        class="flex max-height-[inherit] rounded-sm w-full h-full object-cover aspect-preview overflow-hidden">
+                    </picture>
+                </div>
+            </div>
         </a>
     ) : (
         <div>
@@ -21,8 +31,4 @@ const formattedDate = getDate(date)
             <time datetime={date} class="text-[#808587] text-preview-date font-medium">{formattedDate}</time>
         </div>
     )}
-    <div class="h-[24px]  flex justify-end">
-        
-    </div>
-    <img>
 </article>

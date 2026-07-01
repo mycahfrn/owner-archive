@@ -29,16 +29,7 @@ const classActive = "text-primary bg-hover-button h-8 px-2 text-tabs font-semibo
 
 ---
 <Layout title="Ownrdisk Website">
-    <div class="max-w-156 mx-auto pt-3 pb-8 px-4 mt-2.5">
-        <div class="flex justify-between pb-4">
-            <div tabindex="0" aria-label="Tabs" role="tablist" aria-orientation="horizontal" data-orientation="horizontal" class="flex p-1 rounded border border-gray gap-1" >
-                <button class={classActive}>Lastest</button>
-                <button class={classInactive}>Top</button>
-                <button class={classInactive}>Discussion</button>
-            </div>
-            <SearchButton />
-        </div>
-
+    <div class="max-w-156 mx-auto pt-3 pb-8 px-4 w-full box-content">
         <div class="flex flex-col gap-4">
             {CollectionPost.map((post, i) => {
                 const postData = post.data;
@@ -47,15 +38,15 @@ const classActive = "text-primary bg-hover-button h-8 px-2 text-tabs font-semibo
                 const showMonthHeading = i === 0 || currentMonth !== getMonthKey(CollectionPost[i - 1].data.date);
 
                 return (
-                    <div class="w-full flex flex-col gap-4">
+                    <div class="w-full flex flex-col gap-2">
                         {showMonthHeading && i !== 0 && (
-                            <h2 class="text-[#ea580c] text-preview-date font-medium mt-2">{currentMonth}</h2>
+                            <h2 class="text-[#ea580c] text-preview-date font-medium px-2 pb-6">{currentMonth}</h2>
                         )}
 
-                        <ArchiveItem date={postData.date} title={postData.title} excerpt={postData.excerpt} slug={post.id} />
+                        <ArchiveItem date={postData.date} title={postData.title} excerpt={postData.excerpt} slug={post.id} srcPreview={postData.srcPreview} />
 
                         {i < (CollectionPost.length - 1) && (
-                            <div class="border-b border-[#e5e7eb] w-full" />
+                            <div class="border-b border-[#e5e7eb] w-full flex" />
                         )}
                     </div>
                 );
