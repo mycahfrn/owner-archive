@@ -3,8 +3,9 @@ import { getDate } from "../utils/date"
 import ShareButton from "./ShareButton.astro";
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "") || '/owner-archive';
-const { date = '2024-06-01', srcPreview, title = 'Interpreting Watching T.V', excerpt = "What is left of you if all your negative memories are erased? Are you still you?", slug = '' } = Astro.props;
+const { date , srcPreview, title, excerpt } = Astro.props;
 const formattedDate = getDate(date)
+const slug = title ? title.toLowerCase().replaceAll(".", "").replaceAll(" ", "-") : undefined;
 ---
 
 <article class="flex flex-col gap-1 p-2">

@@ -1,10 +1,14 @@
 ---
 import Layout from "../components/Layout.astro";
 import ArchiveItem from "../components/ArchiveItem.astro";
-import SearchButton from "../components/SearchButton.astro";
 
-// 1. Definimos una interfaz para el tipo de dato
-interface JournalItem {
+import { getMonthKey } from "@utils/date";
+
+import { getCollection } from "astro:content";
+import { undefined } from "astro:schema";
+const CollectionPostFetch = await getCollection("posts");
+
+interface PostPreviewData {
     date: string;
     title: string;
     excerpt: string;
@@ -12,45 +16,63 @@ interface JournalItem {
     altPreview: string;
 }
 
-import { getCollection } from "astro:content";
-const CollectionPost = await getCollection("posts");
+const CollectionPostsByMonths = CollectionPostFetch.map((post) => post.data)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .reduce((acc: Record<string, PostPreviewData[]>, post) => {
+        const monthKey: string = getMonthKey(post.date);
 
-// Ordenar las entradas por fecha descendente usando post.data.date
-CollectionPost.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+        if (!acc[monthKey]) {
+            acc[monthKey] = [];
+        }
+        acc[monthKey].push(post);
+        return acc;
+    }, {});
 
-// 4. Tipamos el parámetro de la función como string
-const getMonthKey = (dateString: string): string => {
-    return new Date(dateString)
-        .toLocaleString('en-US', { month: 'long', year: 'numeric' })
-        .toUpperCase();
-};
-const classInactive = "text-button-tabs h-8 px-2 rounded font-semibold text-tabs hover:text-primary duration-200 ease-in-out"
-const classActive = "text-primary bg-hover-button h-8 px-2 text-tabs font-semibold rounded"
-
+const KeysMonth = Object.keys(CollectionPostsByMonths);
+const mostRecentMonth = KeysMonth[0];
+const mostLastMonth = KeysMonth[KeysMonth.length - 1];
 ---
-<Layout title="Ownrdisk Website">
-    <div class="max-w-156 mx-auto pt-3 pb-8 px-4 w-full box-content">
-        <div class="flex flex-col gap-4">
-            {CollectionPost.map((post, i) => {
-                const postData = post.data;
-                const currentMonth = getMonthKey(postData.date);
-                // Si es el primer elemento, o el mes cambió respecto al anterior, mostramos el título del mes
-                const showMonthHeading = i === 0 || currentMonth !== getMonthKey(CollectionPost[i - 1].data.date);
 
-                return (
-                    <div class="w-full flex flex-col gap-2">
-                        {showMonthHeading && i !== 0 && (
-                            <h2 class="text-[#ea580c] text-preview-date font-medium px-2 pb-6">{currentMonth}</h2>
-                        )}
+<Layout>
+    <div class="flex flex-col gap-4">
+        <div class="max-w-156 mx-auto pt-3 pb-8 px-4 w-full box-content">
+            {
+                Object.entries(CollectionPostsByMonths).map(
+                    ([month, posts]) => (
+                        <div class="flex flex-col">
+                            {mostRecentMonth !== month && (
+                                <h2 class="text-[#ea580c] text-preview-date font-medium px-2 pb-6">
+                                    {month}
+                                </h2>
+                            )}
+                            <div class="flex flex-col">
+                                {posts.map((post, i) => (
+                                    <div>
+                                        <ArchiveItem
+                                            date={post.date}
+                                            srcPreview={post.srcPreview}
+                                            title={post.title}
+                                            excerpt={post.excerpt}
 
-                        <ArchiveItem date={postData.date} title={postData.title} excerpt={postData.excerpt} slug={post.id} srcPreview={postData.srcPreview} />
-
-                        {i < (CollectionPost.length - 1) && (
-                            <div class="border-b border-[#e5e7eb] w-full flex" />
-                        )}
-                    </div>
-                );
-            })}
+                                        />
+                                         {posts[i + 1] && (
+                                            <div class="p-2">
+                                                <div class="border-b border-gray w-full" />
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                                
+                            </div>
+                            {mostLastMonth !== month && (
+                                <div class="p-2">
+                                    <div class="border-b border-gray w-full" />
+                                </div>
+                            )}
+                        </div>
+                    ),
+                )
+            }
         </div>
     </div>
 </Layout>
