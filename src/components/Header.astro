@@ -1,45 +1,66 @@
 ---
-
 import ShareButton from "./ShareButton.astro";
 import SearchButton from "./SearchButton.astro";
 
 const TITLE = "Owner Website";
 
-// 1. Obtenemos la ruta base de Astro (ej: "/mi-repositorio")
-const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); 
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-// 2. Construimos dinámicamente las rutas usando la base
 const MENU_ITEMS = [
-    { name: "Home", href: `${baseUrl}/` },
+    { name: "Home", href: baseUrl === "" ? "/" : baseUrl },
     { name: "Projects", href: `${baseUrl}/projects` },
     { name: "Archive", href: `${baseUrl}/archive` },
     { name: "About", href: `${baseUrl}/about` },
 ];
 
 const currentPath = new URL(Astro.request.url).pathname;
+
+const normalize = (path: string) => {
+    const cleaned = path.replace(/\/$/, "");
+    return cleaned === "" ? "/" : cleaned;
+};
 ---
 
 <header class="flex flex-col items-center justify-center">
-    <div class="flex px-3 pt-3 min-h-18 md:h-header-title items-center md:justify-between w-full md:p-5">
+    <div
+        class="flex px-3 pt-3 min-h-18 md:h-header-title items-center md:justify-between w-full md:p-5"
+    >
         <div></div>
         <div>
-            <h1 class="text-sm md:text-2xl font-semibold font-title text-primary">{TITLE}</h1>
+            <h1
+                class="text-sm md:text-2xl font-semibold font-title text-primary"
+            >
+                {TITLE}
+            </h1>
         </div>
         <div class="hidden md:flex gap-2">
             <ShareButton />
             <SearchButton />
         </div>
     </div>
-    <nav class="h-11.25 md:h-12.25 w-full md:border-t-gray md:border-t border-b-gray border-b" >
+    <nav
+        class="h-11.25 md:h-12.25 w-full md:border-t-gray md:border-t border-b-gray border-b"
+    >
         <ul class="flex md:justify-center items-center h-full px-1 md:px-0">
-            {MENU_ITEMS.map((item) => {
-                const isActive = item.href === currentPath;
-                return (
-                    <li class={`text primary text-sm leading-5 h-full hover:bg-hover-button transition duration-300 ease-in-out font-medium inline-block px-3`} >
-                        <a class={`flex h-full text-primary items-center  ${isActive ? "shadow-[inset_0_-3px_0_#374e5d] font-bold" : ""}`} href={item.href} aria-current={isActive ? "page" : undefined}>{item.name}</a>
-                    </li>
-                );
-            })}
+            {
+                MENU_ITEMS.map((item) => {
+                    // Normalizamos tanto la URL del menú como la URL actual del navegador
+                    const isActive =
+                        normalize(item.href) === normalize(currentPath);
+
+                    return (
+                        <li class="text primary text-sm leading-5 h-full hover:bg-hover-button transition duration-300 ease-in-out font-medium inline-block px-3">
+                            <a
+                                class={`flex h-full text-primary items-center ${isActive ? "shadow-[inset_0_-3px_0_#374e5d] font-bold" : ""}`}
+                                href={item.href}
+                                aria-current={isActive ? "page" : undefined}
+                            >
+                                {item.name}
+                            </a>
+                        </li>
+                    );
+                })
+            }
         </ul>
     </nav>
 </header>
