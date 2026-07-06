@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
     --animate-hover: color var(--animation-timing-fast) var(--animation-smooth), background-color var(--animation-timing-fast) var(--animation-smooth), box-shadow var(--animation-timing-fast) var(--animation-smooth), border var(--animation-timing-fast) var(--animation-smooth), border-radius var(--animation-timing-fast) var(--animation-smooth), opacity var(--animation-timing-fast) var(--animation-smooth), filter var(--animation-timing-fast) var(--animation-smooth), stroke var(--animation-timing-fast) var(--animation-smooth), transform var(--animation-timing-fast) var(--animation-smooth), scale var(--animation-timing-fast) var(--animation-smooth), outline var(--animation-timing-fast) var(--animation-smooth);

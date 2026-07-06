@@ -16,5 +16,8 @@
     "astro": "^6.4.6",
     "astro-tunnel": "^0.1.9",
     "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.20"
   }
 }

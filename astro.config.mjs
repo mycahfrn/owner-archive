@@ -7,7 +7,7 @@ import tunnel from 'astro-tunnel';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mycahfn.github.io',
+  site: 'https://mycahfrn.github.io',
   base:  "/owner-archive",
   vite: {
     plugins: [tailwindcss()]
